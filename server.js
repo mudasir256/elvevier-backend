@@ -23,10 +23,19 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 let db;
 
 async function connectDB() {
-  const client = new MongoClient(MONGO_URI);
-  await client.connect();
-  db = client.db(DB_NAME);
-  console.log("Connected to MongoDB");
+  try {
+    const client = new MongoClient(MONGO_URI, {
+      tls: true,
+      serverSelectionTimeoutMS: 10000,
+    });
+    await client.connect();
+    db = client.db(DB_NAME);
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Failed to connect to MongoDB:", err.message);
+    console.error("Check: 1) Cluster is not paused  2) IP is whitelisted  3) Credentials are correct");
+    process.exit(1);
+  }
 }
 
 // ─── Auth middleware ───
