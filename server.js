@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -5,20 +6,19 @@ const jwt = require("jsonwebtoken");
 const { MongoClient, ObjectId } = require("mongodb");
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-const MONGO_URI =
-  "mongodb+srv://smudasir256_db_user:Dx0OsGHXzRU3dvdI@cluster0.fg93nqi.mongodb.net/?appName=Cluster0";
-const DB_NAME = "elvevier";
-const COLLECTION_NAME = "orders";
+const MONGO_URI = process.env.MONGO_URI;
+const DB_NAME = process.env.DB_NAME;
+const COLLECTION_NAME = process.env.COLLECTION_NAME;
 
-const JWT_SECRET = "elvevier-admin-secret-2026";
-const ADMIN_EMAIL = "admin@elvevier.com";
-const ADMIN_PASSWORD = "Admin@123";
+const JWT_SECRET = process.env.JWT_SECRET;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 let db;
 
