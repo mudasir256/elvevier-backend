@@ -8,7 +8,15 @@ const { MongoClient, ObjectId } = require("mongodb");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://elvevieradmin.vercel.app",
+    "https://elvevier-user-web.vercel.app",
+    "http://localhost:3000",
+    "http://localhost:5173",
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
