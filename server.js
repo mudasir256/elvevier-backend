@@ -71,7 +71,7 @@ app.post("/api/admin/login", (req, res) => {
   res.json({ token, admin: { email, name: "Admin" } });
 });
 
-// ─── Verify token ───
+// ─── Verify tok en ───
 app.get("/api/admin/me", requireAdmin, (req, res) => {
   res.json({ email: req.admin.email, name: "Admin", role: req.admin.role });
 });
