@@ -8,12 +8,7 @@ const { MongoClient, ObjectId } = require("mongodb");
 const app = express();
 const PORT = process.env.PORT || 4000;
 app.use(cors({
-  origin: [
-    "https://elvevieradmin.vercel.app",
-    "https://elvevier-user-web.vercel.app",
-    "http://localhost:3000",
-    "http://localhost:5173",
-  ],
+  origin: true,
   credentials: true,
 }));
 app.use(express.json());
@@ -41,7 +36,6 @@ async function connectDB() {
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err.message);
     console.error("Check: 1) Cluster is not paused  2) IP is whitelisted  3) Credentials are correct");
-    process.exit(1);
   }
 }
 
@@ -391,8 +385,7 @@ app.get("/api/analytics/revenue", requireAdmin, async (req, res) => {
   }
 });
 
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-  });
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+  connectDB();
 });
