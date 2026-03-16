@@ -7,7 +7,6 @@ const { MongoClient, ObjectId } = require("mongodb");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-// asdfg
 app.use(cors({
   origin: [
     "https://elvevieradmin.vercel.app",
@@ -20,13 +19,13 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-const MONGO_URI = process.env.MONGO_URI;
-const DB_NAME = process.env.DB_NAME;
-const COLLECTION_NAME = process.env.COLLECTION_NAME;
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://smudasir256_db_user:Dx0OsGHXzRU3dvdI@cluster0.fg93nqi.mongodb.net/?appName=Cluster0";
+const DB_NAME = process.env.DB_NAME || "elvevier";
+const COLLECTION_NAME = process.env.COLLECTION_NAME || "orders";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const JWT_SECRET = process.env.JWT_SECRET || "elvevier-admin-secret-2026";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@elvevier.com";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Admin@123";
 
 let db;
 
